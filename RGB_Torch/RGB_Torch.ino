@@ -19,7 +19,7 @@ int brightness = 0;         // Initial brightness
 int fade = 5;               // Fade by 5 points (0-255)
 unsigned long oldTime = 0;  // Store old time
 int touch = 0;              // Touch state variable
-int longTouch = 0;              // Touch state variable
+int longTouch = 0;          // Touch state variable
 int oldLongTouch = 0;
 
 int oldTouch = 0;
@@ -28,144 +28,165 @@ int modeCounter = 0;
 
 
 void setup() {
-  pinMode(RED, OUTPUT);
-  pinMode(GREEN, OUTPUT);
-  pinMode(BLUE, OUTPUT);
-  pinMode(TOUCH, INPUT_PULLUP);
-  delay(STARTUP * 2);
+  pinMode(RED, OUTPUT);          // Sets RED to OUTPUT
+  pinMode(GREEN, OUTPUT);        // Sets GREEN to OUTPUT
+  pinMode(BLUE, OUTPUT);         // Sets BLUE to OUTPUT
+  pinMode(TOUCH, INPUT_PULLUP);  // Sets TOUCH to INPUT_PULLUP
+  delay(STARTUP * 2);            // Sets a DELAY OF x2 STARTUP
 
   // Initialize LED colors during startup
-  analogWrite(RED, ON);
-  analogWrite(GREEN, OFF);
-  analogWrite(BLUE, OFF);
-  delay(STARTUP);
+  //Turn RED ON
+  analogWrite(RED, ON);     // Turns RED ON
+  analogWrite(GREEN, OFF);  // Turns GREEN OFF
+  analogWrite(BLUE, OFF);   // Turns BLUE OFF
+  delay(STARTUP);           // Sets a DELAY OF STARTUP
 
-  analogWrite(GREEN, ON);
-  analogWrite(RED, OFF);
-  analogWrite(BLUE, OFF);
-  delay(STARTUP);
+  //Turn GREEN ON
+  analogWrite(GREEN, ON);  // Turns GREEN ON
+  analogWrite(RED, OFF);   // Turns RED OFF
+  analogWrite(BLUE, OFF);  // Turns BLUE OFF
+  delay(STARTUP);          // Sets a DELAY OF STARTUP
 
-  analogWrite(BLUE, ON);
-  analogWrite(RED, OFF);
-  analogWrite(GREEN, OFF);
-  delay(STARTUP);
+  //Turn BLUE ON
+  analogWrite(BLUE, ON);    // Turns BLUE ON
+  analogWrite(RED, OFF);    // Turns RED OFF
+  analogWrite(GREEN, OFF);  // Turns GREEN OFF
+  delay(STARTUP);           // Sets a DELAY OF STARTUP
 
   // Turn off all LEDs
-  analogWrite(RED, OFF);
-  analogWrite(GREEN, OFF);
-  analogWrite(BLUE, OFF);
+  analogWrite(RED, OFF);    // Turns RED OFF
+  analogWrite(GREEN, OFF);  // Turns GREEN OFF
+  analogWrite(BLUE, OFF);   // Turns BLUE OFF
 }
 
 void RedBrightness() {
+  // Set RED to fade 0-255 255-0
   for (brightness = 255; brightness >= 0; brightness -= 5) {
     analogWrite(RED, brightness);
-    analogWrite(GREEN, OFF);
-    analogWrite(BLUE, OFF);
-    delay(FADE);  // Adjust the delay for the fading speed
+    analogWrite(GREEN, OFF);  // Turns GREEN OFF
+    analogWrite(BLUE, OFF);   // Turns BLUE OFF
+    delay(FADE);              // Adjust the delay for the fading speed
   }
   for (brightness = 0; brightness <= 255; brightness += 5) {
     analogWrite(RED, brightness);
-    analogWrite(GREEN, OFF);
-    analogWrite(BLUE, OFF);
-    delay(FADE);  // Adjust the delay for the fading speed
+    analogWrite(GREEN, OFF);  // Turns GREEN OFF
+    analogWrite(BLUE, OFF);   // Turns BLUE OFF
+    delay(FADE);              // Adjust the delay for the fading speed
   }
 }
 void GreenBrightness() {
+  // Set GREEN to fade 0-255 255-0
+
   for (brightness = 255; brightness >= 0; brightness -= 5) {
-    analogWrite(RED, OFF);
+    analogWrite(RED, OFF);  // Turns RED OFF
     analogWrite(GREEN, brightness);
-    analogWrite(BLUE, OFF);
-    delay(FADE);  // Adjust the delay for the fading speed
+    analogWrite(BLUE, OFF);  // Turns BLUE OFF
+    delay(FADE);             // Adjust the delay for the fading speed
   }
   for (brightness = 0; brightness <= 255; brightness += 5) {
-    analogWrite(RED, OFF);
+    analogWrite(RED, OFF);  // Turns RED OFF
     analogWrite(GREEN, brightness);
-    analogWrite(BLUE, OFF);
-    delay(FADE);  // Adjust the delay for the fading speed
+    analogWrite(BLUE, OFF);  // Turns BLUE OFF
+    delay(FADE);             // Adjust the delay for the fading speed
   }
 }
 void BlueBrightness() {
+  // Set BLUE to fade 0-255 255-0
+
   for (brightness = 255; brightness >= 0; brightness -= 5) {
-    analogWrite(RED, OFF);
-    analogWrite(GREEN, OFF);
+    analogWrite(RED, OFF);    // Turns RED OFF
+    analogWrite(GREEN, OFF);  // Turns GREEN OFF
     analogWrite(BLUE, brightness);
     delay(FADE);  // Adjust the delay for the fading speed
   }
   for (brightness = 0; brightness <= 255; brightness += 5) {
-    analogWrite(RED, OFF);
-    analogWrite(GREEN, OFF);
+    analogWrite(RED, OFF);    // Turns RED OFF
+    analogWrite(GREEN, OFF);  // Turns GREEN OFF
     analogWrite(BLUE, brightness);
     delay(FADE);  // Adjust the delay for the fading speed
   }
 }
 void WhiteBrightness() {
+  // Set WHITE to fade 0-255 255-0
+
   for (brightness = 255; brightness >= 0; brightness -= 5) {
-    analogWrite(RED, brightness);
-    analogWrite(GREEN, brightness);
-    analogWrite(BLUE, brightness);
-    delay(FADE);  // Adjust the delay for the fading speed
+    analogWrite(RED, brightness);    // Set RED to fade 0-255 255-0
+    analogWrite(GREEN, brightness);  // Set GREEN to fade 0-255 255-0
+    analogWrite(BLUE, brightness);   // Set BLUE to fade 0-255 255-0
+    delay(FADE);                     // Adjust the delay for the fading speed
   }
   for (brightness = 0; brightness <= 255; brightness += 5) {
-    analogWrite(RED, brightness);
-    analogWrite(GREEN, brightness);
-    analogWrite(BLUE, brightness);
-    delay(FADE);  // Adjust the delay for the fading speed
+    analogWrite(RED, brightness);    // Set RED to fade 0-255 255-0
+    analogWrite(GREEN, brightness);  // Set GREEN to fade 0-255 255-0
+    analogWrite(BLUE, brightness);   // Set BLUE to fade 0-255 255-0
+    delay(FADE);                     // Adjust the delay for the fading speed
   }
 }
 void Red() {
-  analogWrite(RED, ON);
-  analogWrite(GREEN, OFF);
-  analogWrite(BLUE, OFF);
+
+  // Turn RED led ON
+  analogWrite(RED, ON);     // Turns RED ON
+  analogWrite(GREEN, OFF);  // Turns GREEN OFF
+  analogWrite(BLUE, OFF);   // Turns BLUE OFF
 }
 
 void Green() {
-  analogWrite(RED, OFF);
-  analogWrite(GREEN, ON);
-  analogWrite(BLUE, OFF);
+  // Turn GREEN led ON
+
+  analogWrite(RED, OFF);   // Turns RED OFF
+  analogWrite(GREEN, ON);  // Turns GREEN ON
+  analogWrite(BLUE, OFF);  // Turns BLUE OFF
 }
 
 void Blue() {
-  analogWrite(RED, OFF);
-  analogWrite(GREEN, OFF);
-  analogWrite(BLUE, ON);
+  // Turn BLUE led ON
+
+  analogWrite(RED, OFF);    // Turns RED OFF
+  analogWrite(GREEN, OFF);  // Turns GREEN OFF
+  analogWrite(BLUE, ON);    // Turns BLUE ON
 }
 
 void White() {
-  analogWrite(RED, ON);
-  analogWrite(GREEN, ON);
-  analogWrite(BLUE, ON);
+  // Turn ALL led ON to create WHITE
+
+  analogWrite(RED, ON);    // Turns RED ON
+  analogWrite(GREEN, ON);  // Turns GREEN ON
+  analogWrite(BLUE, ON);   // Turns BLUE ON
 }
 void Off() {
-  analogWrite(RED, OFF);
-  analogWrite(GREEN, OFF);
-  analogWrite(BLUE, OFF);
+  analogWrite(RED, OFF);    // Turns RED OFF
+  analogWrite(GREEN, OFF);  // Turns GREEN OFF
+  analogWrite(BLUE, OFF);   // Turns BLUE OFF
 }
 void input() {
+
+  // Decect TOUCH press long or short
+
   unsigned long time = millis();
   touch = digitalRead(TOUCH);
   longTouch = digitalRead(TOUCH);
 
 
   if (touch != oldTouch) {
-    if (touch == HIGH) {
-      counter++;
+    if (touch == HIGH) {  // if TOUCH is touched
+      counter++;          //+1 to counter
     }
     if (longTouch != oldLongTouch) {
-      if (longTouch == HIGH) {
-        if (time - oldTime >= hold) {
-          oldTime = time;
-          modeCounter++;
-          Fader();
+      if (longTouch == HIGH) {         // if TOUCH is longTouch
+        if (time - oldTime >= hold) {  // If Touch HIGH >= 1000ms (hold)
+          oldTime = time;              // reset time to 0
+          modeCounter++;               // +1 to modeCOunter
+          Fader();                     // Enter Fader() Loop
         }
-        if (modeCounter >= ModeMax) {
-          modeCounter = 0;
+        if (modeCounter >= ModeMax) {  // Check if modeCounter >= ModeMax(5)
+          modeCounter = 0;             // Reset modeCounter to 0
         }
       }
     }
-    if (counter >= MAX) {
-      counter = 0;
+    if (counter >= MAX) {  // Check if counter >= MAX(5)
+      counter = 0;         // Reset counter to 0
     } else {
-      Mode();
+      Mode();  // Enter Mode() Loop
     }
   }
   oldTouch = touch;
@@ -212,5 +233,5 @@ void Fader() {
   }
 }
 void loop() {
-  input();
+  input();  // Checks if TOUCH is active
 }
