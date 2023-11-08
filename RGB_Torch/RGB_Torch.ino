@@ -67,7 +67,7 @@ void RedBrightness() {
     analogWrite(BLUE, OFF);   // Turns BLUE OFF
     delay(FADE);              // Adjust the delay for the fading speed
   }
-  // Set RED to fade 0-255 
+  // Set RED to fade 0-255
 
   for (brightness = 0; brightness <= 255; brightness += 5) {
     analogWrite(RED, brightness);
@@ -103,7 +103,7 @@ void BlueBrightness() {
     analogWrite(BLUE, brightness);
     delay(FADE);  // Adjust the delay for the fading speed
   }
-  // Set BLUE to fade 0-255 
+  // Set BLUE to fade 0-255
 
   for (brightness = 0; brightness <= 255; brightness += 5) {
     analogWrite(RED, OFF);    // Turns RED OFF
@@ -121,7 +121,7 @@ void WhiteBrightness() {
     analogWrite(BLUE, brightness);   // Set BLUE to fade 0-255 255-0
     delay(FADE);                     // Adjust the delay for the fading speed
   }
-  // Set WHITE to fade 0-255 
+  // Set WHITE to fade 0-255
 
   for (brightness = 0; brightness <= 255; brightness += 5) {
     analogWrite(RED, brightness);    // Set RED to fade 0-255 255-0
@@ -184,7 +184,8 @@ void input() {
         if (time - oldTime >= hold) {  // If Touch HIGH >= 1000ms (hold)
           oldTime = time;              // reset time to 0
           modeCounter++;               // +1 to modeCOunter
-          Fader();                     // Enter Fader() Loop
+          modeCounter % ModeMax; 
+          Fader();  // Enter Fader() Loop
         }
         if (modeCounter >= ModeMax) {  // Check if modeCounter >= ModeMax(5)
           modeCounter = 0;             // Reset modeCounter to 0
