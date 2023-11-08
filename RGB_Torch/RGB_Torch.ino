@@ -6,6 +6,7 @@ FreeUse licence
 Keep me here Dont be a Copy Kat ;(
 Read Edit Learn   SHARE...............
 */
+/////////////////////////////////////////////////////
 
 #include "PINS.h"
 
@@ -196,19 +197,8 @@ void input() {
           Fader();                     // Enter Fader() Loop
         }
         modeCounter %= ModeMax;
-        /*
-        if (modeCounter >= ModeMax) {  // Check if modeCounter >= ModeMax(5)
-          modeCounter = 0;             // Reset modeCounter to 0
-       }
-       */
       }
-    }
-    /*
-    if (counter >= MAX) {  // Check if counter >= MAX(5)
-      counter = 0;         // Reset counter to 0
-    } 
-    */
-    else {
+    } else {
       Mode();  // Enter Mode() Loop
     }
   }
