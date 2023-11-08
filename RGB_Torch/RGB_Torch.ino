@@ -60,13 +60,15 @@ void setup() {
 }
 
 void RedBrightness() {
-  // Set RED to fade 0-255 255-0
+  // Set RED to fade  255-0
   for (brightness = 255; brightness >= 0; brightness -= 5) {
     analogWrite(RED, brightness);
     analogWrite(GREEN, OFF);  // Turns GREEN OFF
     analogWrite(BLUE, OFF);   // Turns BLUE OFF
     delay(FADE);              // Adjust the delay for the fading speed
   }
+  // Set RED to fade 0-255 
+
   for (brightness = 0; brightness <= 255; brightness += 5) {
     analogWrite(RED, brightness);
     analogWrite(GREEN, OFF);  // Turns GREEN OFF
@@ -75,7 +77,7 @@ void RedBrightness() {
   }
 }
 void GreenBrightness() {
-  // Set GREEN to fade 0-255 255-0
+  // Set GREEN to fade 255-0
 
   for (brightness = 255; brightness >= 0; brightness -= 5) {
     analogWrite(RED, OFF);  // Turns RED OFF
@@ -83,6 +85,8 @@ void GreenBrightness() {
     analogWrite(BLUE, OFF);  // Turns BLUE OFF
     delay(FADE);             // Adjust the delay for the fading speed
   }
+  // Set GREEN to fade 0-255
+
   for (brightness = 0; brightness <= 255; brightness += 5) {
     analogWrite(RED, OFF);  // Turns RED OFF
     analogWrite(GREEN, brightness);
@@ -91,7 +95,7 @@ void GreenBrightness() {
   }
 }
 void BlueBrightness() {
-  // Set BLUE to fade 0-255 255-0
+  // Set BLUE to fade 255-0
 
   for (brightness = 255; brightness >= 0; brightness -= 5) {
     analogWrite(RED, OFF);    // Turns RED OFF
@@ -99,6 +103,8 @@ void BlueBrightness() {
     analogWrite(BLUE, brightness);
     delay(FADE);  // Adjust the delay for the fading speed
   }
+  // Set BLUE to fade 0-255 
+
   for (brightness = 0; brightness <= 255; brightness += 5) {
     analogWrite(RED, OFF);    // Turns RED OFF
     analogWrite(GREEN, OFF);  // Turns GREEN OFF
@@ -107,7 +113,7 @@ void BlueBrightness() {
   }
 }
 void WhiteBrightness() {
-  // Set WHITE to fade 0-255 255-0
+  // Set WHITE to fade  255-0
 
   for (brightness = 255; brightness >= 0; brightness -= 5) {
     analogWrite(RED, brightness);    // Set RED to fade 0-255 255-0
@@ -115,6 +121,8 @@ void WhiteBrightness() {
     analogWrite(BLUE, brightness);   // Set BLUE to fade 0-255 255-0
     delay(FADE);                     // Adjust the delay for the fading speed
   }
+  // Set WHITE to fade 0-255 
+
   for (brightness = 0; brightness <= 255; brightness += 5) {
     analogWrite(RED, brightness);    // Set RED to fade 0-255 255-0
     analogWrite(GREEN, brightness);  // Set GREEN to fade 0-255 255-0
