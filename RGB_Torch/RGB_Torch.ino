@@ -1,7 +1,23 @@
-#define RED 1    // PB1 physical pin 6
-#define GREEN 0  // PB0 physical pin 7
-#define BLUE 4   // PB4 physical pin 3
-#define TOUCH 2  // PB2 physical pin 7
+
+#if defined(__AVR_ATmega328P__) // Check if compiling for ATmega328p (e.g., Arduino Nano)
+  #define RED 9     // PB1 physical pin 13
+  #define GREEN 10  // PB0 physical pin 14
+  #define BLUE 11   // PB4 physical pin 15
+  #define TOUCH A3  // PB2 physical pin 26
+#elif defined(__AVR_ATtiny85__) // Check if compiling for ATtiny85
+  #define RED 1    // PB1 physical pin 6
+  #define GREEN 0  // PB0 physical pin 5
+  #define BLUE 4   // PB4 physical pin 3
+  #define TOUCH 2  // PB2 physical pin 7
+#else
+  #error "Unsupported board selected"
+#endif
+
+
+
+#define _AVR_ATtiny_85_
+#define _AVR_ATmega328p_
+
 
 #define STARTUP 1000  // Delay for startup LED test
 #define FADE 10       // fade time
@@ -179,22 +195,28 @@ void input() {
     if (touch == HIGH) {  // if TOUCH is touched
       counter++;          //+1 to counter
     }
+    counter %= MAX;
     if (longTouch != oldLongTouch) {
       if (longTouch == HIGH) {         // if TOUCH is longTouch
         if (time - oldTime >= hold) {  // If Touch HIGH >= 1000ms (hold)
           oldTime = time;              // reset time to 0
           modeCounter++;               // +1 to modeCOunter
-          modeCounter % ModeMax; 
-          Fader();  // Enter Fader() Loop
+          Fader();                     // Enter Fader() Loop
         }
+        modeCounter %= ModeMax;
+        /*
         if (modeCounter >= ModeMax) {  // Check if modeCounter >= ModeMax(5)
           modeCounter = 0;             // Reset modeCounter to 0
-        }
+       }
+       */
       }
     }
+    /*
     if (counter >= MAX) {  // Check if counter >= MAX(5)
       counter = 0;         // Reset counter to 0
-    } else {
+    } 
+    */
+    else {
       Mode();  // Enter Mode() Loop
     }
   }
