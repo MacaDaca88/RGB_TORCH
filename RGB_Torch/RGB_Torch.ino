@@ -9,6 +9,7 @@ Read Edit Learn   SHARE...............
 /////////////////////////////////////////////////////
 
 #include "PINS.h"
+//#include "DEBUG.h"
 
 
 
@@ -21,6 +22,7 @@ Read Edit Learn   SHARE...............
 #define OFF 255  // Reverse logic for RGB (HIGH = OFF)
 
 // Delays
+#define DEBUG 500
 const long hold = 1000;  // Delay for button hold function
 
 // Variables
@@ -34,9 +36,15 @@ int oldLongTouch = 0;
 int oldTouch = 0;
 int counter = 0;
 int modeCounter = 0;
+int FadeShow = 0;
+int ModeSelect = 0;
 
 
 void setup() {
+  // Initialize serial communication
+#if defined(__AVR_ATmega328P__)
+  Serial.begin(9600);  // Set the baud rate as needed
+#endif
   pinMode(RED, OUTPUT);          // Sets RED to OUTPUT
   pinMode(GREEN, OUTPUT);        // Sets GREEN to OUTPUT
   pinMode(BLUE, OUTPUT);         // Sets BLUE to OUTPUT
@@ -206,7 +214,7 @@ void input() {
   oldLongTouch = longTouch;
 }
 void Mode() {
-  int ModeSelect = counter;
+  ModeSelect = counter;
 
   switch (ModeSelect) {
     case 0:
@@ -227,7 +235,7 @@ void Mode() {
   }
 }
 void Fader() {
-  int FadeShow = modeCounter;
+  FadeShow = modeCounter;
 
   switch (FadeShow) {
 
@@ -245,6 +253,20 @@ void Fader() {
       break;
   }
 }
+void debug() {
+
+#if defined(__AVR_ATmega328P__)
+  // Add your debug prints here for the ATmega328P
+  Serial.println("Debug message for ATmega328P");
+  Serial.print("counter  ==  ");
+  Serial.println(counter);
+  Serial.print("modeCounter  ==  ");
+  Serial.println(modeCounter);
+  delay(DEBUG);
+#endif
+}
+
 void loop() {
   input();  // Checks if TOUCH is active
+  debug();
 }
