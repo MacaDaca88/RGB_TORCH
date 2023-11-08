@@ -1,5 +1,14 @@
-#include "PINS.h"
+/*/////////////Color Defintions/////////////
 
+Add New Colors here to call from anywhere
+
+
+//////////////////////////////////////////*/
+
+#ifndef RGB_Torch_h
+#define RGB_Torch_h
+#include "PINS.h"
+#include "SolidColor.h"
 
 void Red() {
 
@@ -37,3 +46,4 @@ void Off() {
   analogWrite(GREEN, OFF);  // Turns GREEN OFF
   analogWrite(BLUE, OFF);   // Turns BLUE OFF
 }
+#endif

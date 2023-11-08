@@ -7,23 +7,26 @@ Keep me here Dont be a Copy Kat ;(
 Read Edit Learn   SHARE...............
 */
 /////////////////////////////////////////////////////
-
 #include "PINS.h"
-//#include "DEBUG.h"
+#include "DEBUG.h"
+#include "SolidColor.h"
 
 
+// Fade Speed
+#define FADE 10  // fade time
 
-#define STARTUP 1000  // Delay for startup LED test
-#define FADE 10       // fade time
-#define MAX 5         // Max counter
-#define ModeMax 5     // Max counter
+// Counter limits
+#define MAX 5      // Max counter
+#define ModeMax 5  // Max counter
 
+// Reverse Logic for Common Anode
 #define ON 0     // Reverse logic for RGB (LOW = ON)
 #define OFF 255  // Reverse logic for RGB (HIGH = OFF)
 
 // Delays
+#define STARTUP 1000  // Delay for startup LED test
 #define DEBUG 500
-const long hold = 1000;  // Delay for button hold function
+#define HOLD 1000  // Delay for button hold function
 
 // Variables
 int brightness = 0;         // Initial brightness
@@ -147,6 +150,7 @@ void WhiteBrightness() {
     delay(FADE);                     // Adjust the delay for the fading speed
   }
 }
+/*
 void Red() {
 
   // Turn RED led ON
@@ -183,6 +187,7 @@ void Off() {
   analogWrite(GREEN, OFF);  // Turns GREEN OFF
   analogWrite(BLUE, OFF);   // Turns BLUE OFF
 }
+*/
 void input() {
 
   // Decect TOUCH press long or short
@@ -199,7 +204,7 @@ void input() {
     counter %= MAX;
     if (longTouch != oldLongTouch) {
       if (longTouch == HIGH) {         // if TOUCH is longTouch
-        if (time - oldTime >= hold) {  // If Touch HIGH >= 1000ms (hold)
+        if (time - oldTime >= HOLD) {  // If Touch HIGH >= 1000ms (hold)
           oldTime = time;              // reset time to 0
           modeCounter++;               // +1 to modeCOunter
           Fader();                     // Enter Fader() Loop
@@ -253,7 +258,7 @@ void Fader() {
       break;
   }
 }
-void debug() {
+/*void debug() {
 
 #if defined(__AVR_ATmega328P__)
   // Add your debug prints here for the ATmega328P
@@ -265,7 +270,7 @@ void debug() {
   delay(DEBUG);
 #endif
 }
-
+*/
 void loop() {
   input();  // Checks if TOUCH is active
   debug();

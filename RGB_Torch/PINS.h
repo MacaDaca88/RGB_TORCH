@@ -1,4 +1,13 @@
-#if defined(__AVR_ATmega328P__)  // Check if compiling for ATmega328p (e.g., Arduino Nano)
+/*/////////////////////Pin Definitions////////////////////
+
+Edit to suit each pin is PWM (RED,GREEN,BLUE)
+
+TOUCH = analog INPUT_PULLUP
+
+
+////////////////////////////////////////////////////////*/
+
+#if defined(__AVR_ATmega328P__)|| (__AVR_ATmega168__)  // Check if compiling for ATmega328p (e.g., Arduino Nano)
 
 #define RED 9     // PB1 physical pin 15
 #define GREEN 10  // PB2 physical pin 16
@@ -6,7 +15,7 @@
 #define TOUCH A3  // PC3 physical pin 26
 
 #elif defined(__AVR_ATtiny85__)  // Check if compiling for ATtiny85
-// Burn Bootloader at 8MHz Internal Clock
+// Burn Bootloader at 8MHz Internal Clock  For (1000ms = 1sec)
 
 #define RED 1    // PB1 physical pin 6
 #define GREEN 0  // PB0 physical pin 5

@@ -1,7 +1,14 @@
-#ifndef DEBUG_h
-#define DEBUG_h
+/*///////////////DEBUG///////////////////////
+
+Try Keep DEBUG lines here for easy READ and calling
+
+///////////////////////////////////////////*/
+
+#ifndef RGB_Torch_h
+#define RGB_Torch_h
 
 #include "PINS.h"
+#include "SolidColor.h"
 
 void debug() {
 
