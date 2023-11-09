@@ -17,7 +17,7 @@ Read Edit Learn   SHARE...............
 
 // Counter limits
 #define MAX 5      // Max counter
-#define ModeMax 5  // Max counter
+#define ModeMax 4  // Max modeCounter
 
 // Reverse Logic for Common Anode
 #define ON 0     // Reverse logic for RGB (LOW = ON)
