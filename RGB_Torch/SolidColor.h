@@ -5,10 +5,12 @@ Add New Colors here to call from anywhere
 
 //////////////////////////////////////////*/
 
-#ifndef RGB_Torch_h
-#define RGB_Torch_h
-#include "PINS.h"
-#include "SolidColor.h"
+#ifndef SOLIDCOLOR_H
+#define SOLIDCOLOR_H
+
+bool red = false;
+bool green = false;
+bool blue = false;
 
 void Red() {
 
@@ -16,6 +18,7 @@ void Red() {
   analogWrite(RED, ON);     // Turns RED ON
   analogWrite(GREEN, OFF);  // Turns GREEN OFF
   analogWrite(BLUE, OFF);   // Turns BLUE OFF
+  red = true;
 }
 
 void Green() {
@@ -24,6 +27,7 @@ void Green() {
   analogWrite(RED, OFF);   // Turns RED OFF
   analogWrite(GREEN, ON);  // Turns GREEN ON
   analogWrite(BLUE, OFF);  // Turns BLUE OFF
+  green = true;
 }
 
 void Blue() {
@@ -32,6 +36,7 @@ void Blue() {
   analogWrite(RED, OFF);    // Turns RED OFF
   analogWrite(GREEN, OFF);  // Turns GREEN OFF
   analogWrite(BLUE, ON);    // Turns BLUE ON
+  blue = true;
 }
 
 void White() {
@@ -46,4 +51,5 @@ void Off() {
   analogWrite(GREEN, OFF);  // Turns GREEN OFF
   analogWrite(BLUE, OFF);   // Turns BLUE OFF
 }
+
 #endif

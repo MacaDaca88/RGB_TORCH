@@ -7,9 +7,9 @@ Keep me here Dont be a Copy Kat ;(
 Read Edit Learn   SHARE...............
 */
 /////////////////////////////////////////////////////
+
 #include "PINS.h"
-#include "DEBUG.h"
-#include "SolidColor.h"
+
 
 
 // Fade Speed
@@ -42,152 +42,19 @@ int modeCounter = 0;
 int FadeShow = 0;
 int ModeSelect = 0;
 
+#include "StartUp.h"
+#include "ColorShift.h"
+#include "SolidColor.h"
+#include "DEBUG.h"
 
 void setup() {
-  // Initialize serial communication
-#if defined(__AVR_ATmega328P__)
-  Serial.begin(9600);  // Set the baud rate as needed
+  // Initialize serial communication if availible
+#if defined(ESP8266) || (ESP32) || (__AVR_ATmega328P__)||(__AVR_ATmega168__)
+  Serial.begin(115200);  // Set the baud rate as needed
 #endif
-  pinMode(RED, OUTPUT);          // Sets RED to OUTPUT
-  pinMode(GREEN, OUTPUT);        // Sets GREEN to OUTPUT
-  pinMode(BLUE, OUTPUT);         // Sets BLUE to OUTPUT
-  pinMode(TOUCH, INPUT_PULLUP);  // Sets TOUCH to INPUT_PULLUP
-  delay(STARTUP * 2);            // Sets a DELAY OF x2 STARTUP
-
-  // Initialize LED colors during startup
-  //Turn RED ON
-  analogWrite(RED, ON);     // Turns RED ON
-  analogWrite(GREEN, OFF);  // Turns GREEN OFF
-  analogWrite(BLUE, OFF);   // Turns BLUE OFF
-  delay(STARTUP);           // Sets a DELAY OF STARTUP
-
-  //Turn GREEN ON
-  analogWrite(GREEN, ON);  // Turns GREEN ON
-  analogWrite(RED, OFF);   // Turns RED OFF
-  analogWrite(BLUE, OFF);  // Turns BLUE OFF
-  delay(STARTUP);          // Sets a DELAY OF STARTUP
-
-  //Turn BLUE ON
-  analogWrite(BLUE, ON);    // Turns BLUE ON
-  analogWrite(RED, OFF);    // Turns RED OFF
-  analogWrite(GREEN, OFF);  // Turns GREEN OFF
-  delay(STARTUP);           // Sets a DELAY OF STARTUP
-
-  // Turn off all LEDs
-  analogWrite(RED, OFF);    // Turns RED OFF
-  analogWrite(GREEN, OFF);  // Turns GREEN OFF
-  analogWrite(BLUE, OFF);   // Turns BLUE OFF
+  startup();
 }
 
-void RedBrightness() {
-  // Set RED to fade  255-0
-  for (brightness = 255; brightness >= 0; brightness -= 5) {
-    analogWrite(RED, brightness);
-    analogWrite(GREEN, OFF);  // Turns GREEN OFF
-    analogWrite(BLUE, OFF);   // Turns BLUE OFF
-    delay(FADE);              // Adjust the delay for the fading speed
-  }
-  // Set RED to fade 0-255
-
-  for (brightness = 0; brightness <= 255; brightness += 5) {
-    analogWrite(RED, brightness);
-    analogWrite(GREEN, OFF);  // Turns GREEN OFF
-    analogWrite(BLUE, OFF);   // Turns BLUE OFF
-    delay(FADE);              // Adjust the delay for the fading speed
-  }
-}
-void GreenBrightness() {
-  // Set GREEN to fade 255-0
-
-  for (brightness = 255; brightness >= 0; brightness -= 5) {
-    analogWrite(RED, OFF);  // Turns RED OFF
-    analogWrite(GREEN, brightness);
-    analogWrite(BLUE, OFF);  // Turns BLUE OFF
-    delay(FADE);             // Adjust the delay for the fading speed
-  }
-  // Set GREEN to fade 0-255
-
-  for (brightness = 0; brightness <= 255; brightness += 5) {
-    analogWrite(RED, OFF);  // Turns RED OFF
-    analogWrite(GREEN, brightness);
-    analogWrite(BLUE, OFF);  // Turns BLUE OFF
-    delay(FADE);             // Adjust the delay for the fading speed
-  }
-}
-void BlueBrightness() {
-  // Set BLUE to fade 255-0
-
-  for (brightness = 255; brightness >= 0; brightness -= 5) {
-    analogWrite(RED, OFF);    // Turns RED OFF
-    analogWrite(GREEN, OFF);  // Turns GREEN OFF
-    analogWrite(BLUE, brightness);
-    delay(FADE);  // Adjust the delay for the fading speed
-  }
-  // Set BLUE to fade 0-255
-
-  for (brightness = 0; brightness <= 255; brightness += 5) {
-    analogWrite(RED, OFF);    // Turns RED OFF
-    analogWrite(GREEN, OFF);  // Turns GREEN OFF
-    analogWrite(BLUE, brightness);
-    delay(FADE);  // Adjust the delay for the fading speed
-  }
-}
-void WhiteBrightness() {
-  // Set WHITE to fade  255-0
-
-  for (brightness = 255; brightness >= 0; brightness -= 5) {
-    analogWrite(RED, brightness);    // Set RED to fade 0-255 255-0
-    analogWrite(GREEN, brightness);  // Set GREEN to fade 0-255 255-0
-    analogWrite(BLUE, brightness);   // Set BLUE to fade 0-255 255-0
-    delay(FADE);                     // Adjust the delay for the fading speed
-  }
-  // Set WHITE to fade 0-255
-
-  for (brightness = 0; brightness <= 255; brightness += 5) {
-    analogWrite(RED, brightness);    // Set RED to fade 0-255 255-0
-    analogWrite(GREEN, brightness);  // Set GREEN to fade 0-255 255-0
-    analogWrite(BLUE, brightness);   // Set BLUE to fade 0-255 255-0
-    delay(FADE);                     // Adjust the delay for the fading speed
-  }
-}
-/*
-void Red() {
-
-  // Turn RED led ON
-  analogWrite(RED, ON);     // Turns RED ON
-  analogWrite(GREEN, OFF);  // Turns GREEN OFF
-  analogWrite(BLUE, OFF);   // Turns BLUE OFF
-}
-
-void Green() {
-  // Turn GREEN led ON
-
-  analogWrite(RED, OFF);   // Turns RED OFF
-  analogWrite(GREEN, ON);  // Turns GREEN ON
-  analogWrite(BLUE, OFF);  // Turns BLUE OFF
-}
-
-void Blue() {
-  // Turn BLUE led ON
-
-  analogWrite(RED, OFF);    // Turns RED OFF
-  analogWrite(GREEN, OFF);  // Turns GREEN OFF
-  analogWrite(BLUE, ON);    // Turns BLUE ON
-}
-
-void White() {
-  // Turn ALL led ON to create WHITE
-
-  analogWrite(RED, ON);    // Turns RED ON
-  analogWrite(GREEN, ON);  // Turns GREEN ON
-  analogWrite(BLUE, ON);   // Turns BLUE ON
-}
-void Off() {
-  analogWrite(RED, OFF);    // Turns RED OFF
-  analogWrite(GREEN, OFF);  // Turns GREEN OFF
-  analogWrite(BLUE, OFF);   // Turns BLUE OFF
-}
-*/
 void input() {
 
   // Decect TOUCH press long or short
@@ -258,19 +125,7 @@ void Fader() {
       break;
   }
 }
-/*void debug() {
 
-#if defined(__AVR_ATmega328P__)
-  // Add your debug prints here for the ATmega328P
-  Serial.println("Debug message for ATmega328P");
-  Serial.print("counter  ==  ");
-  Serial.println(counter);
-  Serial.print("modeCounter  ==  ");
-  Serial.println(modeCounter);
-  delay(DEBUG);
-#endif
-}
-*/
 void loop() {
   input();  // Checks if TOUCH is active
   debug();
