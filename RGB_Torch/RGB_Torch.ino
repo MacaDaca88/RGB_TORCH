@@ -10,8 +10,6 @@ Read Edit Learn   SHARE...............
 
 #include "PINS.h"
 
-
-
 // Fade Speed
 #define FADE 10  // fade time
 
@@ -42,88 +40,21 @@ int modeCounter = 0;
 int FadeShow = 0;
 int ModeSelect = 0;
 
+
 #include "StartUp.h"
+#include "INput.h"
+
 #include "ColorShift.h"
 #include "SolidColor.h"
+#include "OUTput.h"
 #include "DEBUG.h"
 
 void setup() {
   // Initialize serial communication if availible
-#if defined(ESP8266) || (ESP32) || (__AVR_ATmega328P__)||(__AVR_ATmega168__)
+#if defined(ESP8266) || (ESP32) || (__AVR_ATmega328P__) || (__AVR_ATmega168__)
   Serial.begin(115200);  // Set the baud rate as needed
 #endif
   startup();
-}
-
-void input() {
-
-  // Decect TOUCH press long or short
-
-  unsigned long time = millis();
-  touch = digitalRead(TOUCH);
-  longTouch = digitalRead(TOUCH);
-
-
-  if (touch != oldTouch) {
-    if (touch == HIGH) {  // if TOUCH is touched
-      counter++;          //+1 to counter
-    }
-    counter %= MAX;
-    if (longTouch != oldLongTouch) {
-      if (longTouch == HIGH) {         // if TOUCH is longTouch
-        if (time - oldTime >= HOLD) {  // If Touch HIGH >= 1000ms (hold)
-          oldTime = time;              // reset time to 0
-          modeCounter++;               // +1 to modeCOunter
-          Fader();                     // Enter Fader() Loop
-        }
-        modeCounter %= ModeMax;
-      }
-    } else {
-      Mode();  // Enter Mode() Loop
-    }
-  }
-  oldTouch = touch;
-  oldLongTouch = longTouch;
-}
-void Mode() {
-  ModeSelect = counter;
-
-  switch (ModeSelect) {
-    case 0:
-      White();
-      break;
-    case 1:
-      Red();
-      break;
-    case 2:
-      Green();
-      break;
-    case 3:
-      Blue();
-      break;
-    case 4:
-      Off();
-      break;
-  }
-}
-void Fader() {
-  FadeShow = modeCounter;
-
-  switch (FadeShow) {
-
-    case 0:
-      RedBrightness();
-      break;
-    case 1:
-      GreenBrightness();
-      break;
-    case 2:
-      BlueBrightness();
-      break;
-    case 3:
-      WhiteBrightness();
-      break;
-  }
 }
 
 void loop() {

@@ -3,7 +3,6 @@
 #define COLORSHIFT_H
 
 
-
 void RedBrightness() {
   // Set RED to fade  255-0
   for (brightness = 255; brightness >= 0; brightness -= 5) {
